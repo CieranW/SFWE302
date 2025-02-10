@@ -32,11 +32,18 @@
             <version>7.2.5</version>
         </dependency>
 
-        <!-- FIX: Add JUnit 4.13.2 -->
+        <!-- FIX: Add JUnit 5.9.3 for testing -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.9.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -89,6 +96,17 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+                <configuration>
+                    <includes>
+                        <include>**/Assignment2Test.java</include>
+                    </includes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
