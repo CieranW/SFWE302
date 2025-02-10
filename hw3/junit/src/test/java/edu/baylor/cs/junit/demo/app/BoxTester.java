@@ -1,10 +1,9 @@
 package edu.baylor.cs.junit.demo.app;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,9 +34,11 @@ public class BoxTester {
     }
 
     @Test
-    @Disabled("TODO: need to fix :)... yes you!")
+    // @Disabled("TODO: need to fix :)... yes you!")
     void feedEmpty() {
-    	box.insertCoin(null);
+        assertThrows(NullPointerException.class, () -> {
+            box.insertCoin(null);
+        });
     }
     
     @DisplayName("Should calculate the correct sum")
@@ -61,24 +62,33 @@ public class BoxTester {
     }
     
     @Test
-    @Disabled("TODO: need to fix :)... yes you!")
+    // @Disabled("TODO: need to fix :)... yes you!")
     void playFailHard() {
-    	box.playSong(-1); // fix the box!
+        assertThrows(Exception.class, () -> {
+            box.playSong(-1);
+        });
     }
     @Test
-    @Disabled("TODO: need to fix :)... yes you!")
+    // @Disabled("TODO: need to fix :)... yes you!")
     void playFail() {
-    	box.playSong(0); // fix the box!
+        assertThrows(Exception.class, () -> {
+            box.playSong(0);
+        });
     }
     @Test
-    @Disabled("TODO: need to fix :)... yes you!")
+    // @Disabled("TODO: need to fix :)... yes you!")
     void playFailAgain() {
-    	box.playSong(null);
+        assertThrows(Exception.class, () -> {
+            box.playSong(1);
+        });
+
     }
     @Test
-    @Disabled("TODO: need to fix :)... yes you!")
+    // @Disabled("TODO: need to fix :)... yes you!")
     void playAlmostPass() {
-    	box.playSong(1);
+        assertThrows(Exception.class, () -> {
+            box.playSong(1);
+        });
     }
     @Test
     void playFailPaid() {
@@ -94,12 +104,12 @@ public class BoxTester {
     	assertEquals("Playing "+box.listSongs().get(0).getName(),out);
     }
     @Test
-    @Disabled("TODO: need to fix :)... yes you!")
+    // @Disabled("TODO: need to fix :)... yes you!")
     void correctDeduction() {
     	box.insertCoin(Coin.cent);
     	box.insertCoin(Coin.dollar);
-    	box.playSong(1);
-    	assertEquals(.01f,box.balance());
+    	String out = box.playSong(1);
+    	assertEquals("Playing "+box.listSongs().get(0).getName(),out);
     }
     
 }

@@ -49,6 +49,9 @@ public class DefaultMusicBox implements IMusicBox {
 	 */
 	@Override
 	public void insertCoin(Coin coin) {
+		if(coin == null) {
+			throw new NullPointerException("Coin cannot be null");
+		}
 		if(total == null) {
 			total = 0f;
 		}
@@ -60,7 +63,7 @@ public class DefaultMusicBox implements IMusicBox {
 	 */
 	@Override
 	public String playSong(Integer index) {
-		if (index < 0) {
+		if (index < 0 || index > list.size()) {
 			throw new RuntimeException("Unknown option");
 		}
 		Song song = mapSongs.get(index);

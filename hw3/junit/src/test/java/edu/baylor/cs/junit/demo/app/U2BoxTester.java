@@ -1,6 +1,5 @@
 package edu.baylor.cs.junit.demo.app;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,7 @@ import edu.baylor.cs.junit.demo.app.objects.Coin;
 public class U2BoxTester extends BoxTester {
 
 	/* Do we need this here? */
-	private IMusicBox box = null;
+	// private IMusicBox box = null;
 	
     @BeforeEach
     void init() {
