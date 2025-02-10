@@ -1,14 +1,23 @@
 package com.example;
 
-import com.itextpdf.kernel.pdf.*;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.properties.UnitValue;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.apache.poi.ss.usermodel.*;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.properties.UnitValue;
 
 public class Assignment2 
 {
@@ -41,7 +50,7 @@ public class Assignment2
         }
     }
 
-    private static List<List<String>> readCsv(File file) {
+    public static List<List<String>> readCsv(File file) {
         List<List<String>> data = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -57,7 +66,7 @@ public class Assignment2
         return data;
     }
 
-    private static void generatePDF(String fileName, List<List<String>> data) {
+    public static void generatePDF(String fileName, List<List<String>> data) {
         try (PdfWriter writer = new PdfWriter(fileName);
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf)) {
@@ -85,7 +94,7 @@ public class Assignment2
         }
     }
 
-    private static void generateXLSX(String fileName, List<List<String>> data) {
+    public static void generateXLSX(String fileName, List<List<String>> data) {
         try(Workbook workbook = new XSSFWorkbook();
             FileOutputStream fileOut = new FileOutputStream(fileName)) {
             
