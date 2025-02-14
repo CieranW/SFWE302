@@ -25,7 +25,7 @@ public class App
             String inputLine;
             
             while ((inputLine = in.readLine()) != null) {
-                System.out.println(inputLine);
+                processLine(inputLine);
             }
         } catch (MalformedURLException e2) {
             e2.printStackTrace();
