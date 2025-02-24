@@ -1,9 +1,11 @@
 package edu.baylor.cs.csi3471;
 
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Make {
 	private static int idCounter = 1;
@@ -11,12 +13,11 @@ public class Make {
 	private final String makeName;
 	private Set<ModelSettings> modelSettingSet;
 
-	public Make(String[] line) {
+	public Make(String makeName) {
 		// TODO generate using eclipse/intellij source code autogenerator
 		this.makeID = idCounter++;
-		this.makeName = line[6];
+		this.makeName = makeName;
 		this.modelSettingSet = new HashSet<>();
-		this.modelSettingSet.add(new ModelSettings(line));
 	}
 
 	public int getMakeID() {
@@ -68,13 +69,13 @@ public class Make {
 	// there are 2 options, do this functionality here(its static),
 	// or in your tester.java and call this method from the make object that a 
 	// line is. I would suggest number 2. 
-	public Collection<Make> creatorPattern(String[] line, Collection<Make> makes) {
-		if (!modelSettingSet.contains(new ModelSettings(line))) {
-			// if the make does not exist then create a new one
+	// public Collection<Make> creatorPattern(String[] line, Collection<Make> makes) {
+	// 	if (!modelSettingSet.contains(new ModelSettings(line))) {
+	// 		// if the make does not exist then create a new one
 
-		} else {
-			// if the make does exist, update its modelSettingSet
-		}
-		return makes;
-	}
+	// 	} else {
+	// 		// if the make does exist, update its modelSettingSet
+	// 	}
+	// 	return makes;
+	// }
 }

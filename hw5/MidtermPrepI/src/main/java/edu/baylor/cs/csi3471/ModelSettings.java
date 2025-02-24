@@ -35,6 +35,24 @@ public class ModelSettings {
 	private final MPG mpg;
 	private final Make make;
 
+	public int getModelID() { return modelID; }
+
+	public String getModelName() { return modelName; }
+
+	public String getFuelType() { return fuelType; }
+
+	public String getTransmission() { return transmission; }
+
+	public String getVehicleClass() { return vehicleClass; }
+
+	public int getYear() { return year; }
+
+	public int getCylinders() { return cylinders; }
+
+	public double getDisplacement() { return displacement; }
+
+	public MPG getMpg() { return mpg; }
+
 	@Override
 	public int hashCode() {
 		// TODO generate by eclipse/idea following your choice!
