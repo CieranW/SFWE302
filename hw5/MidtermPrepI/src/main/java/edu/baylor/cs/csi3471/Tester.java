@@ -138,7 +138,7 @@ public class Tester {
 
 				System.out.println("===============");
 
-				// ✅ Filter the Makes based on partial match
+				// Filter the Makes based on partial match
 				List<Make> filteredMakes = makes.stream()
 					.filter(m -> {
 						if ("makename".equals(columnName)) { // Match makeName
@@ -149,10 +149,10 @@ public class Tester {
 						}
 						return false;
 					})
-					.sorted(Comparator.comparing(Make::getMakeName)) // ✅ Sort A→Z
+					.sorted(Comparator.comparing(Make::getMakeName)) // Sort A→Z
 					.toList(); // Convert stream to list
 
-				// ✅ Print only filtered makes (not all makes!)
+				// Print only filtered makes (not all makes!)
 				if (filteredMakes.isEmpty()) {
 					System.out.println("No matches found for [" + columnName + " = " + value + "]");
 				} else {
