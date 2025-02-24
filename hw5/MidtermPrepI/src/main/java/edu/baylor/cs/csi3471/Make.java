@@ -1,9 +1,6 @@
 package edu.baylor.cs.csi3471;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -44,16 +41,17 @@ public class Make {
 	@Override
 	public String toString() {
 		// TODO generate using eclipse/intellij source code autogenerator
-		List<ModelSettings> sortedModels = new ArrayList<>(modelSettingSet);
-		sortedModels.sort(Comparator.comparing(ModelSettings::getModelName).thenComparing(ModelSettings::getYear));
+		// List<ModelSettings> sortedModels = new ArrayList<>(modelSettingSet);
+		// sortedModels.sort(Comparator.comparing(ModelSettings::getModelName).thenComparing(ModelSettings::getYear));
 
-		StringBuilder sb = new StringBuilder();
-		sb.append(makeName).append(":\n");
-		for (ModelSettings model : sortedModels) {
-			sb.append("\t").append(model).append("\n");
-		}
+		// StringBuilder sb = new StringBuilder();
+		// sb.append(makeName).append(":\n");
+		// for (ModelSettings model : sortedModels) {
+		// 	sb.append("\t").append(model).append("\n");
+		// }
 
-		return sb.toString();
+		// return sb.toString();
+		return makeName;
 	}
 
 	@Override

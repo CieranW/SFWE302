@@ -5,9 +5,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.*;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 public class Tester {
 
@@ -36,6 +41,10 @@ public class Tester {
 	 */
 
 	public static Collection<Make> populateSet(Collection<Make> set, String[] line) {
+		if(line.length < 11 || Arrays.stream(line).anyMatch(String::isEmpty)) {
+			return set;
+		}
+
 		String makeName = line[6];
 		Make make = set.stream().filter(m -> m.getMakeName().equals(makeName)).findFirst().orElseGet(() -> {
 			Make newMake = new Make(makeName);
@@ -56,11 +65,12 @@ public class Tester {
 			Collection<Make> makes = new HashSet<>();
 			String line = null;
 			reader.readLine(); // skip the header
+			reader.readLine();
 
 			while ((line = reader.readLine()) != null) {
 				String[] split = line.split(",");
 				// just to debug
-				System.out.println(split[6] + " : " + split[7]);
+				// System.out.println(split[6] + " : " + split[7]);
 
 				makes = populateSet(makes, split);
 			}
@@ -105,27 +115,51 @@ public class Tester {
 			case 1:
 				System.out.println("Total Makes: " + makes.size());
 				System.out.println("===============");
-				makes.stream()
-					.sorted(Comparator.comparing(Make::getMakeName).reversed()) // Sort Z→A
-					.forEach(m -> System.out.println(m.getMakeName() + " (" + m.getModelSettingSet().size() + ")"));
+
+				List<Make> sortedMakes = new ArrayList<>(makes);
+				sortedMakes.sort(Comparator.comparing(Make::getMakeName).reversed());
+				
+				sortedMakes.forEach(m -> System.out.println(m.getMakeName() + ": " + m.getModelSettingSet().size()));
+
 				System.out.println("===============");
-				makes.stream()
-					.sorted(Comparator.comparing(Make::getMakeName).reversed()) // Sort Z→A
-					.forEach(m -> System.out.println(m.toString()));
+
+				sortedMakes.forEach(m -> System.out.println(m.toString()));
 				break;
 
 			case 2:
+				// Ensure correct number of arguments
 				if (args.length < 4) {
 					System.err.println("Usage: java Tester 2 <filePath> <columnName> <value>");
 					System.exit(1);
 				}
-				String value = args[3].toLowerCase(); // Search value
 
-				makes.stream()
-					.filter(m -> m.getMakeName().toLowerCase().contains(value) ||
-								m.getModelSettingSet().stream().anyMatch(ms -> ms.getModelName().toLowerCase().contains(value)))
-					.sorted(Comparator.comparing(Make::getMakeName)) // Sort A→Z
-					.forEach(m -> System.out.println(m.toString()));
+				String columnName = args[2].trim().toLowerCase(); // Column to filter by (makeName or model)
+				String value = args[3].trim().toLowerCase(); // The value to match (partial match allowed)
+
+				System.out.println("===============");
+
+				// ✅ Filter the Makes based on partial match
+				List<Make> filteredMakes = makes.stream()
+					.filter(m -> {
+						if ("makename".equals(columnName)) { // Match makeName
+							return m.getMakeName().trim().toLowerCase().contains(value);
+						} else if ("model".equals(columnName)) { // Match model name inside ModelSettings
+							return m.getModelSettingSet().stream()
+									.anyMatch(ms -> ms.getModelName().trim().toLowerCase().contains(value));
+						}
+						return false;
+					})
+					.sorted(Comparator.comparing(Make::getMakeName)) // ✅ Sort A→Z
+					.toList(); // Convert stream to list
+
+				// ✅ Print only filtered makes (not all makes!)
+				if (filteredMakes.isEmpty()) {
+					System.out.println("No matches found for [" + columnName + " = " + value + "]");
+				} else {
+					filteredMakes.forEach(m -> System.out.println(m.toString()));
+				}
+
+				System.out.println("===============");
 				break;
 
 			case 3:
