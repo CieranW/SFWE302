@@ -1,10 +1,31 @@
 package edu.baylor.cs.csi3471;
 
+import java.util.Comparator;
 import java.util.Set;
+import java.util.HashSet;
+import java.util.Objects;
 
 public class Make {
-
+	private static int idCounter = 1;
+	private final int makeID;
+	private final String makeName;
 	private Set<ModelSettings> modelSettingSet;
+
+	public Make(String[] line) {
+		// TODO generate using eclipse/intellij source code autogenerator
+		this.makeID = idCounter++;
+		this.makeName = line[6];
+		this.modelSettingSet = new HashSet<>();
+		this.modelSettingSet.add(new ModelSettings(line));
+	}
+
+	public int getMakeID() {
+		return makeID;
+	}
+
+	public String getMakeName() {
+		return makeName;
+	}
 
 	public Set<ModelSettings> getModelSettingSet() {
 		return modelSettingSet;
@@ -16,25 +37,32 @@ public class Make {
 
 	@Override
 	public int hashCode() {
-		// TODO generate using eclipse/intellij source code autogenerator
-		return -1;
+		return Objects.hash(modelSettingSet);
 	}
 
 	@Override
 	public String toString() {
 		// TODO generate using eclipse/intellij source code autogenerator
-		return "";
-	}
+		List<ModelSettings> sortedModels = new ArrayList<>(modelSettingSet);
+		sortedModels.sort(Comparator.comparing(ModelSettings::getModelName).thenComparing(ModelSettings::getYear));
 
-	public Make(String[] line) {
-		// TODO generate using eclipse/intellij source code autogenerator
-		super();
+		StringBuilder sb = new StringBuilder();
+		sb.append(makeName).append(":\n");
+		for (ModelSettings model : sortedModels) {
+			sb.append("\t").append(model).append("\n");
+		}
+
+		return sb.toString();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		// TODO generate using eclipse/intellij source code autogenerator
-		return false;
+		if (this == obj) return true;
+		if (obj == null || getClass() != obj.getClass()) return false;
+
+		Make other = (Make) obj;
+		return Objects.equals(makeName, other.makeName);
 	}
 
 	// there are 2 options, do this functionality here(its static),
@@ -43,6 +71,7 @@ public class Make {
 	public Collection<Make> creatorPattern(String[] line, Collection<Make> makes) {
 		if (!modelSettingSet.contains(new ModelSettings(line))) {
 			// if the make does not exist then create a new one
+
 		} else {
 			// if the make does exist, update its modelSettingSet
 		}
