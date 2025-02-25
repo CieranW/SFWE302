@@ -15,4 +15,10 @@ public class MountainBike extends Bicycle {
     public void setSuspension(String suspensionType) {
         this.suspension = suspensionType;
     }
+
+    @Override
+    public void printDescription() {
+        super.printDescription();
+        System.out.println("The " + "MountainBike has a" + getSuspension() + " suspension.");
+    }
 }
