@@ -1,7 +1,7 @@
 package edu.baylor.ecs.si;
 
 public interface BicycleVisitor {
-    public void accept(Bicycle b);
-    public void accept(MountainBike b);
-    public void accept(RoadBike b);
+    public void acceptBike(Bicycle b);
+    public void acceptBike(MountainBike b);
+    public void acceptBike(RoadBike b);
 }
