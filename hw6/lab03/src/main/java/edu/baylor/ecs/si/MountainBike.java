@@ -21,4 +21,9 @@ public class MountainBike extends Bicycle {
         super.printDescription();
         System.out.println("The " + "MountainBike has a" + getSuspension() + " suspension.");
     }
+
+    @Override
+    public void visit(BasicService service) {
+        service.acceptBike(this);
+    }
 }

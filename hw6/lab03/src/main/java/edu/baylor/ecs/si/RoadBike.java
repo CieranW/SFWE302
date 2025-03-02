@@ -17,4 +17,9 @@ public abstract class RoadBike extends Bicycle {
         super.printDescription();
         System.out.println("The road bike has a tire width of " + this.tireWidth + "mm.");
     }
+
+    @Override
+    public void visit(BasicService service) {
+        service.acceptBike(this);
+    }
 }
