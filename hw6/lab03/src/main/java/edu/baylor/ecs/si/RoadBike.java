@@ -1,6 +1,6 @@
 package edu.baylor.ecs.si;
 
-public abstract class RoadBike extends Bicycle {
+public class RoadBike extends Bicycle {
     private int tireWidth;
 
     public RoadBike(int startCadence, int startSpeed, int startGear, int newTireWidth) {

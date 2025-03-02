@@ -36,4 +36,8 @@ public class Bicycle {
     public void visit(BasicService service) {
         service.acceptBike(this);
     }
+
+    public void visit(BicycleVisitor service) {
+        service.acceptBike(this);
+    }
 }

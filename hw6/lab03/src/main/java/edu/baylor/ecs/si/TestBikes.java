@@ -18,9 +18,9 @@ public class TestBikes {
         BasicService service3 = new RoadBikeService();
 
         System.out.println("\nSingle dispatch:");
-        service1.accept(bike01);
-        service2.accept(bike02);
-        service3.accept(bike03);
+        service1.acceptBike(bike01);
+        service2.acceptBike(bike02);
+        service3.acceptBike(bike03);
 
 
         System.out.println("\nDouble dispatch:");
