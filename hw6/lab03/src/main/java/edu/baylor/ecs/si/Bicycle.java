@@ -32,4 +32,12 @@ public class Bicycle {
                 + " with a cadence of " + this.cadence +
                 " and travelling at a speed of " + this.speed + ". ");
     }
+
+    public void visit(BasicService service) {
+        service.acceptBike(this);
+    }
+
+    public void visit(BicycleVisitor service) {
+        service.acceptBike(this);
+    }
 }
