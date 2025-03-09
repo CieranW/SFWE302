@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.zip.Deflater;
 import java.util.zip.DeflaterOutputStream;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterOutputStream;
 
 import edu.baylor.ecs.csi5324.decorator.DataSource;
 import edu.baylor.ecs.csi5324.decorator.DataSourceDecorator;
@@ -55,7 +57,18 @@ public class CompressionDecorator extends DataSourceDecorator {
 		// convert byte data via inflater to ByteArrayOutputStream
 		// ..
 		// return new String(bout.toByteArray());
-		return null;
 
+		byte[] data = Base64.getDecoder().decode(stringData);
+
+		try {
+			ByteArrayOutputStream bout = new ByteArrayOutputStream(512);
+			InflaterOutputStream ios = new InflaterOutputStream(bout, new Inflater());
+			ios.write(data);
+			ios.close();
+			bout.close();
+			return new String(bout.toByteArray());
+		} catch (IOException ex) {
+			return null;
+		}
 	}
 }

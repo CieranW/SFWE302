@@ -1,0 +1,6 @@
+edu/baylor/ecs/csi5324/decorator/impl/FileDataSource.class
+edu/baylor/ecs/csi5324/decorator/DataSource.class
+edu/baylor/ecs/csi5324/decorator/impl/CompressionDecorator.class
+edu/baylor/ecs/csi5324/decorator/impl/EncryptionDecorator.class
+edu/baylor/ecs/csi5324/decorator/DataSourceDecorator.class
+edu/baylor/ecs/csi5324/decorator/DecoratorDemo.class

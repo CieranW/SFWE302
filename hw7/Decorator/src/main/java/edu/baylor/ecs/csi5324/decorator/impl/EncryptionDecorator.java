@@ -33,7 +33,10 @@ public class EncryptionDecorator extends DataSourceDecorator {
     	// use returned byte[] to do the invert of encode loop
     	// return as String
     	// byte[] result = ..
-    	byte[] result = new byte[0]; 
+    	byte[] result = Base64.getDecoder().decode(data);
+        for (int i = 0; i < result.length; i++) {
+            result[i] -= (byte) 1;
+        } 
         return new String(result);
     }
 }
