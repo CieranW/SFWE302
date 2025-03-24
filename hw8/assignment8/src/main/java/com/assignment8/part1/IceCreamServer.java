@@ -1,4 +1,10 @@
 package hw8.assignment8.src.main.java.com.assignment8.part1;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class IceCreamServer {
     public static void main(String[] args) throws IOException {
@@ -22,7 +28,7 @@ public class IceCreamServer {
             outputLine = protocol.processInput(null);
             sockOut.println(outputLine);
             
-            while ((inputLine =- sockIn.readLine()) != null) {
+            while ((inputLine = sockIn.readLine()) != null) {
                 outputLine = protocol.processInput(inputLine);
                 sockOut.println(outputLine);
                 if(outputLine.equals("Bye")) { break; }
