@@ -1,31 +1,26 @@
 package thread;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 class CubbyHole {
-	private int seq;
-	private boolean available = false;
+    private final int maxProducts = 10;
+    private Queue<Integer> buffer = new LinkedList<>();
 
-	public synchronized int get() {
-		while (available == false) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-			}
-		}
-		available = false;
-		notify();
-		return seq;
-	}
+    public synchronized int get() {
+        while (buffer.isEmpty()) {
+            try { wait(); } catch (InterruptedException e) {}
+        }
+        int value = buffer.poll();
+        notifyAll(); // Notify producers
+        return value;
+    }
 
-	public synchronized void put(int value) {
-		while (available == true) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-			}
-		}
-		seq = value;
-		available = true;
-		notify();
-		
-	}
+    public synchronized void put(int value) {
+        while (buffer.size() >= maxProducts) {
+            try { wait(); } catch (InterruptedException e) {}
+        }
+        buffer.offer(value);
+        notifyAll(); // Notify consumers
+    }
 }
